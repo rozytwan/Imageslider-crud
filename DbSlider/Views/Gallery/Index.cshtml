@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DbSlider.Models.DbImgaes>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 70%;
+        margin: auto;
+    }
+</style>
+<script>
+    jQuery(function ($) {
+        $('.secret-source').secretSource({
+            includeTag: false
+        });
+
+        $('#banner-fade').bjqs({
+            height: 320,
+            width: 620,
+            responsive: true
+        });
+    });
+</script>
+
+<div class="container">
+    <br>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+
+        <ol class="carousel-indicators">
+
+            @{
+                int b = 0;
+            }
+            @foreach (var item in Model)
+            {
+                if (b == 0)
+                {
+                    <li data-target="#myCarousel" data-slide-to="@b" class="active"></li>
+                }
+                else
+                {
+                    <li data-target="#myCarousel" data-slide-to="@b"></li>
+                }
+                b++;
+            }
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            @{
+                int a = 0;
+            }
+            @foreach (var item in Model)
+            {
+                if (a == 0)
+                {
+                    <div class="item active">
+                        <img  class="img-responsive" src='~/@Html.DisplayFor(modelItem => item.ImagePath)'
+                             title='@Html.DisplayFor(modelItem => item.ImageName)' height="200" width="850" alt="">
+                        <div class="carousel-caption">
+                            <h3>@Html.DisplayFor(modelItem => item.ImageName)</h3>
+
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="item">
+                        <img  class="img-responsive" src='~/@Html.DisplayFor(modelItem => item.ImagePath)'
+                             title='@Html.DisplayFor(modelItem => item.ImageName)' height="200" width="850" alt="">
+                        <div class="carousel-caption">
+                            <h3>@Html.DisplayFor(modelItem => item.ImageName)</h3>
+
+                        </div>
+                    </div>
+                }
+                a++;
+            }
+        </div>
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
